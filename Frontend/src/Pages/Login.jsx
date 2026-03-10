@@ -28,8 +28,10 @@ function Login() {
       })
        if (res.data.success) {
         console.log(res.data.user);
-        toast.success(`Welcome Back ${res.data.user.firstname} `);  
-        window.location.href = "/";
+        toast.success(`Welcome Back ${res.data.user.firstname} `); 
+        setTimeout(() => {
+        window.location.href = "/";;
+      }, 1000); 
       } else {
         toast.error("Login failed");       
       }
