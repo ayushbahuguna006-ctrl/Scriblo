@@ -2,7 +2,7 @@ const User = require("../models/usermodel")
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const getdatauri = require("../utils/datauri");
-const =require('../utils/cloudinary')
+const cloudinary=require('../utils/cloudinary')
 //Controller
 const register = async (req, res) => {
     try {
@@ -128,7 +128,7 @@ const updateprofile=async(req,res)=>{
         const {firstname,lastname,facebook,instagram,linkedin,github,description}=req.body
         const file=req.file;
         const fileuri=getdatauri(file)
-         const uploadResult = await 
+         const uploadResult = await cloudinary.uploader.upload(fileuri)
          const user=await User.findById(userId).select("-password")
          if(!user){
             return res.status(404).json({

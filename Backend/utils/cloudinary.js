@@ -2,7 +2,7 @@ const cloudinary=require('cloudinary');
 const dotenv=require('dotenv')
 dotenv.config()
 
-(async function() {
+
 
     // Configuration
     cloudinary.config({ 
@@ -10,5 +10,4 @@ dotenv.config()
         api_key: process.env.API_KEY, 
         api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
     });    
-})();
 module.exports=cloudinary
