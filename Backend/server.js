@@ -10,8 +10,8 @@ app.use(express.json())
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(cors({
-     origin: "http://localhost:5173", // frontend origin
-    credentials: true,  
+  origin: "http://15.207.31.52", 
+  credentials: true,
 }))
 app.use('/api/v1/user',userroute)
 const PORT=process.env.PORT || 3000
