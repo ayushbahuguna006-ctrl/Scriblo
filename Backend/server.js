@@ -10,7 +10,7 @@ app.use(express.json())
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(cors({
-  origin: "http://15.207.31.52", 
+  origin: ["http://localhost:5173", "http://15.207.31.52"],
   credentials: true,
 }))
 app.use('/api/v1/user',userroute)
