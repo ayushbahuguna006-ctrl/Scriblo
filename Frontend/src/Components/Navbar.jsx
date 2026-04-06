@@ -25,7 +25,7 @@ function Navbar() {
     const checkUser = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/api/v1/user/me",
+          "/api/v1/user/me",
           { withCredentials: true }
         );
 
@@ -44,7 +44,7 @@ function Navbar() {
   }, []);
   const handlesubmit = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/api/v1/user/logout', {
+      const res = await axios.get('/api/v1/user/logout', {
         headers: {
           "Content-Type": "application/json"
         },
