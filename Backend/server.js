@@ -14,6 +14,6 @@ app.use(cors({
   credentials: true,
 }))
 app.use('/api/v1/user',userroute)
-const PORT=process.env.PORT || 3000
+const PORT=process.env.PORT 
 connectDB()
 app.listen(PORT,()=>console.log(`server started on port ${PORT}`));
