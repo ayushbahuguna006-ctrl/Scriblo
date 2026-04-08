@@ -1,5 +1,5 @@
 name: Deploy to EC2
-# CI/CD pipeline
+
 on:
   push:
     branches:
@@ -13,18 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create SSH key
+      - name: Write SSH key
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          printf '%s\n' "${{ secrets.EC2_SSH_KEY }}" > key.pem
           chmod 600 key.pem
+
+      - name: Test SSH connection
+        run: |
+          ssh -vvv -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "echo SSH_OK"
 
       - name: Deploy on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/${{ secrets.EC2_USER }}/Scriblo
-
-            git pull origin main
-
-            docker compose down
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+            cd /home/${{ secrets.EC2_USER }}/Scriblo &&
+            git fetch origin &&
+            git reset --hard origin/main &&
             docker compose up -d --build
-          EOF
+          "
