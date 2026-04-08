@@ -1,5 +1,5 @@
 name: Deploy
-# CI/CD Pipeline
+
 on:
   push:
     branches:
@@ -15,8 +15,9 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
           chmod 600 key.pem
 
-          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
-            cd /home/${{ secrets.EC2_USER }}/Scriblo &&
-            git pull &&
-            docker compose up -d --build
-          "
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/Scriblo
+            git pull
+            docker-compose down
+            docker-compose up -d --build
+          EOF
