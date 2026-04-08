@@ -1,5 +1,5 @@
 name: Deploy to EC2
-
+# //CI/CD pipeline
 on:
   push:
     branches:
